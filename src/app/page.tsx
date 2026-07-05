@@ -10,6 +10,7 @@ import { SurfaceNotDeployedSection } from "@/lib/sections";
 import { storeConfig, seoContext } from "@/lib/config";
 import { loadDeployedSurface } from "@/lib/store";
 import { Catalog } from "./catalog";
+import { Hero } from "./hero";
 
 // Always render fresh against the live book; do not cache the catalog page.
 export const dynamic = "force-dynamic";
@@ -25,6 +26,7 @@ export default async function CatalogPage() {
         // schema.org JSON-LD for the storefront root.
         dangerouslySetInnerHTML={{ __html: jsonLdScript(jsonLd) }}
       />
+      <Hero />
       {surface.deployed ? (
         <Catalog network={storeConfig.network} curation={storeConfig.curation} />
       ) : surface.reason === "mainnet-not-enabled" ? (

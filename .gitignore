@@ -10,3 +10,5 @@ next-env.d.ts
 
 # hosted job-spec documents (the activation route writes here)
 /.agenc/
+
+.vercel

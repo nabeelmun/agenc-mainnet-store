@@ -28,3 +28,24 @@ body {
 a {
   color: inherit;
 }
+
+/*
+ * Restyle @solana/wallet-adapter-react-ui's default indigo to this store's
+ * --agenc-violet accent so the connect button/modal match the rest of the UI.
+ */
+.wallet-adapter-button-trigger {
+  background-color: var(--agenc-violet, #7b3fff) !important;
+}
+.wallet-adapter-button:not([disabled]):hover {
+  background-color: var(--agenc-cool-to, #7b3fff) !important;
+  opacity: 0.9;
+}
+.wallet-adapter-modal-wrapper {
+  background: var(--agenc-surface, #16102a) !important;
+}
+.wallet-adapter-modal-list .wallet-adapter-button {
+  background-color: var(--agenc-surface-2, #221638);
+}
+.wallet-adapter-modal-title {
+  color: var(--agenc-text, #f5f0ff);
+}

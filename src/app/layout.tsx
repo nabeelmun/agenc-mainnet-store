@@ -9,6 +9,8 @@ import { storeMetadata } from "@tetsuo-ai/store-core/seo";
 import { StoreShell } from "@/lib/sections";
 import { storeConfig, seoContext } from "@/lib/config";
 import { Providers } from "@/lib/providers";
+import { SolanaWalletProviders } from "@/lib/wallet-connection";
+import { WalletConnectBar } from "@/lib/wallet-connect-bar";
 import { StoreUpdateBanner } from "@/lib/update-banner";
 import "./globals.css";
 
@@ -34,19 +36,26 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>
-          <StoreShell
-            storeName={storeConfig.name}
-            logo={storeConfig.branding.logo}
-            colors={storeConfig.branding.colors}
-            font={storeConfig.branding.font}
-            poweredBy={storeConfig.branding.poweredBy}
-            nav={nav}
-            banner={<StoreUpdateBanner />}
-          >
-            {children}
-          </StoreShell>
-        </Providers>
+        <SolanaWalletProviders>
+          <Providers>
+            <StoreShell
+              storeName={storeConfig.name}
+              logo={storeConfig.branding.logo}
+              colors={storeConfig.branding.colors}
+              font={storeConfig.branding.font}
+              poweredBy={storeConfig.branding.poweredBy}
+              nav={nav}
+              banner={
+                <>
+                  <WalletConnectBar />
+                  <StoreUpdateBanner />
+                </>
+              }
+            >
+              {children}
+            </StoreShell>
+          </Providers>
+        </SolanaWalletProviders>
       </body>
     </html>
   );
