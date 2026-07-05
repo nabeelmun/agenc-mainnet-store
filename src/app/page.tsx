@@ -8,7 +8,7 @@
 import { storeJsonLd, jsonLdScript } from "@tetsuo-ai/store-core/seo";
 import { SurfaceNotDeployedSection } from "@/lib/sections";
 import { storeConfig, seoContext } from "@/lib/config";
-import { loadDeployedSurface } from "@/lib/store";
+import { loadDeployedSurface, loadStoreListings } from "@/lib/store";
 import { Catalog } from "./catalog";
 import { Hero } from "./hero";
 
@@ -18,6 +18,7 @@ export const dynamic = "force-dynamic";
 export default async function CatalogPage() {
   const surface = await loadDeployedSurface();
   const jsonLd = storeJsonLd(seoContext);
+  const liveListings = await loadStoreListings();
 
   return (
     <>
@@ -26,17 +27,19 @@ export default async function CatalogPage() {
         // schema.org JSON-LD for the storefront root.
         dangerouslySetInnerHTML={{ __html: jsonLdScript(jsonLd) }}
       />
-      <Hero />
-      {surface.deployed ? (
-        <Catalog network={storeConfig.network} curation={storeConfig.curation} />
-      ) : surface.reason === "mainnet-not-enabled" ? (
-        <SurfaceNotDeployedSection surface={surface} />
-      ) : (
-        // devnet/localnet with no live listings: render the client catalog so
-        // its designed empty-state copy (with the seed hint) shows, and so it
-        // recovers live as soon as listings appear without a reload.
-        <Catalog network={storeConfig.network} curation={storeConfig.curation} />
-      )}
+      <Hero liveListingCount={liveListings.length} />
+      <div id="catalog">
+        {surface.deployed ? (
+          <Catalog network={storeConfig.network} curation={storeConfig.curation} />
+        ) : surface.reason === "mainnet-not-enabled" ? (
+          <SurfaceNotDeployedSection surface={surface} />
+        ) : (
+          // devnet/localnet with no live listings: render the client catalog so
+          // its designed empty-state copy (with the seed hint) shows, and so it
+          // recovers live as soon as listings appear without a reload.
+          <Catalog network={storeConfig.network} curation={storeConfig.curation} />
+        )}
+      </div>
     </>
   );
 }

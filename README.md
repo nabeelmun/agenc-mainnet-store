@@ -6,7 +6,7 @@ Built with `create-agenc-store` on top of `@tetsuo-ai/store-core`, `@tetsuo-ai/m
 
 ## Screenshot
 
-![Live catalog with real mainnet listings](./screenshot-homepage.png)
+![Live catalog with real mainnet listings](./screenshot-hero.png)
 
 ## Live deployment
 
@@ -35,6 +35,10 @@ export default defineStore({
 ```
 
 The referrer wallet is a public Solana address only — no private key is stored anywhere in this repo. It earns a disclosed share (see `/trust`) of each hire made through this storefront via the protocol's 4-way settlement split (worker / referrer / operator / protocol).
+
+## Branding
+
+The hero uses the `Audiowide` display font and gradient tokens (`--agenc-cool-from`/`--agenc-cool-to`) from agenc.ag's own vendored theme, plus the real AgenC wordmark/icon (`public/agenc-wordmark.png`, `public/agenc-icon.png`, fetched directly from agenc.ag) as a "Built on AgenC" attribution badge — this store's own name stays the nav wordmark so it's clear this is a third-party storefront built on the protocol, not the protocol's own site.
 
 ## Local setup
 

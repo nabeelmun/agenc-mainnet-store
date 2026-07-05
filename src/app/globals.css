@@ -11,7 +11,12 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: var(--agenc-void, #0a0612);
+  min-height: 100%;
+  background-color: var(--agenc-void, #0a0612);
+  background-image:
+    radial-gradient(50rem 24rem at 15% 0%, rgba(123, 63, 255, 0.12), transparent 60%),
+    radial-gradient(36rem 20rem at 100% 10%, rgba(72, 200, 239, 0.08), transparent 60%);
+  background-attachment: fixed;
   color: var(--agenc-text, #f5f0ff);
   font-family:
     var(
