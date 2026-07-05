@@ -8,7 +8,7 @@
 import { storeJsonLd, jsonLdScript } from "@tetsuo-ai/store-core/seo";
 import { SurfaceNotDeployedSection } from "@/lib/sections";
 import { storeConfig, seoContext } from "@/lib/config";
-import { loadDeployedSurface, loadStoreListings } from "@/lib/store";
+import { loadDeployedSurface } from "@/lib/store";
 import { Catalog } from "./catalog";
 import { Hero } from "./hero";
 
@@ -18,7 +18,6 @@ export const dynamic = "force-dynamic";
 export default async function CatalogPage() {
   const surface = await loadDeployedSurface();
   const jsonLd = storeJsonLd(seoContext);
-  const liveListings = await loadStoreListings();
 
   return (
     <>
@@ -27,7 +26,7 @@ export default async function CatalogPage() {
         // schema.org JSON-LD for the storefront root.
         dangerouslySetInnerHTML={{ __html: jsonLdScript(jsonLd) }}
       />
-      <Hero liveListingCount={liveListings.length} />
+      <Hero />
       <div id="catalog">
         {surface.deployed ? (
           <Catalog network={storeConfig.network} curation={storeConfig.curation} />
